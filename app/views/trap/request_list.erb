@@ -1,1 +1,71 @@
 <h1>Request list</h1>
+
+<h2>Trap name: <%= @trap.name %></h2>
+
+<table class="request-table">
+  <tr>
+    <th>
+        Request date
+    </th>
+    <th>
+        Remote IP
+    </th>
+    <th>
+        Request method
+    </th>
+    <th>
+        Scheme
+    </th>
+    <th>
+        Query string
+    </th>
+    <th>
+        Query params
+    </th>
+    <th>
+        Cookies
+    </th>
+    <th>
+        Headers
+    </th>
+  </tr>
+  <% @trap.requests.each do |request| %>
+  <tr>
+    <td>
+      <%= request.created_at %>
+    </td>
+    <td>
+      <%= request.remote_ip %>
+    </td>
+    <td>
+      <%= request.request_method %>
+    </td>
+    <td>
+      <%= request.scheme %>
+    </td>
+    <td>
+      <%= request.query_string %>
+    </td>
+    <td>
+      <%request.query_params_to_hash.each do |param|  %>
+        <p><%= "#{param[0]}: #{param[1]}" %></p>
+      <% end %>
+    </td>
+    <td>
+      <%request.cookies_to_hash.each do |cookie|  %>
+          <p><%= "#{cookie[0]}: #{cookie[1]}" %></p>
+      <% end %>
+    </td>
+    <td>
+      <%request.headers_to_hash.each do |header|  %>
+          <p>
+            <strong>
+              <%= "#{header[0]}:" %>
+            </strong>
+            <%="#{header[1]}" %></p>
+      <% end %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+
