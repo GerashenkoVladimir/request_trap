@@ -28,7 +28,7 @@ class TrapController < ApplicationController
                                  query_params: @new_request.query_params_to_hash.to_json,
                                  cookies: @new_request.cookies_to_hash.to_json,
                                  headers: @new_request.headers_to_hash.to_json
-    @trap
+    head :ok
   end
   def request_list
     @trap = Trap.find_by(name: params[:trap_id])

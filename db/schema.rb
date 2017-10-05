@@ -13,20 +13,20 @@
 ActiveRecord::Schema.define(version: 20171003134218) do
 
   create_table "requests", force: :cascade do |t|
-    t.datetime "created_at"
-    t.string "remote_ip"
-    t.string "request_method"
-    t.string "scheme"
-    t.string "query_string"
+    t.datetime "created_at", null: false
+    t.string "remote_ip", null: false
+    t.string "request_method", null: false
+    t.string "scheme", null: false
+    t.string "query_string", null: false
     t.string "query_params"
     t.string "cookies"
-    t.string "headers"
+    t.string "headers", null: false
     t.integer "trap_id"
     t.index ["trap_id"], name: "index_requests_on_trap_id"
   end
 
   create_table "traps", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
   end
 
 end
