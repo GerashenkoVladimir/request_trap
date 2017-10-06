@@ -2,9 +2,7 @@ class TrapController < ApplicationController
   def index
   end
   def catch_request
-    @trap = Trap.find_by(name: params[:trap_id])
-    @trap = Trap.new(name: params[:trap_id]) unless @trap
-    @trap.save
+    @trap = Trap.find_or_create_by(name: params[:trap_id])
     header_keys = request.headers.env.keys.select do |header_name|
       header_name.match("^HTTP|^REQUEST|^SERVER|^QUERY|PATH")
     end
@@ -19,8 +17,10 @@ class TrapController < ApplicationController
         cookies: request.cookies,
         headers: header_list
     )
+
     ActionCable.server.broadcast 'trap',
-                                 created_at: @new_request.created_at,
+                                 id: @new_request.id,
+                                 created_at: @new_request.created_at.strftime('%H:%M:%S %d-%m-%Y'),
                                  query_string: @new_request.query_string,
                                  remote_ip: @new_request.remote_ip,
                                  request_method: @new_request.request_method,
@@ -31,6 +31,10 @@ class TrapController < ApplicationController
     head :ok
   end
   def request_list
-    @trap = Trap.find_by(name: params[:trap_id])
+    @trap = Trap.find_or_create_by(name: params[:trap_id])
+  end
+
+  def show
+    @request = Request.find_by id: params[:id]
   end
 end

@@ -7,7 +7,7 @@
 #
 
 class Trap < ApplicationRecord
-  has_many :requests, dependent: destroy
+  has_many :requests, dependent: :destroy
   validates :name, presence: true
   validates :name, uniqueness: true
   validates_associated :requests

@@ -16,7 +16,7 @@
 
 class Request <ApplicationRecord
   belongs_to :trap
-  validates :created_at, :remote_ip, :request_method, :scheme, :query_string, :trap, presence: true
+  validates :remote_ip, :request_method, :scheme, :query_string, :trap, presence: true
 
   def query_params_to_hash
     eval(query_params)

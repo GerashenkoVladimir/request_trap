@@ -1,0 +1,20 @@
+<tr>
+  <td>
+    <%= request.created_at.strftime('%H:%M:%S %d-%m-%Y') %>
+  </td>
+  <td>
+    <%= request.remote_ip %>
+  </td>
+  <td>
+    <%= request.request_method %>
+  </td>
+  <td>
+    <%= request.scheme %>
+  </td>
+  <td>
+    <%= request.query_string %>
+  </td>
+  <td>
+    <%= link_to 'Show', request_show_path(id: request.id) %>
+  </td>
+</tr>

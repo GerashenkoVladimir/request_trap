@@ -1,0 +1,40 @@
+<h1>Request of trap: <%= @request.trap.name %></h1>
+<%= link_to 'Back', request_list_path(trap_id: @request.trap.name) %>
+<p>
+  <strong>Time creation: </strong>
+  <%= @request.created_at.strftime('%H:%M:%S %d-%m-%Y') %>
+</p>
+<p>
+  <strong>Remote ip</strong>
+  <%= @request.remote_ip %>
+</p>
+<p>
+  <strong>Request method</strong>
+  <%= @request.request_method %>
+</p>
+<p>
+  <strong>Schema</strong>
+  <%= @request.scheme %>
+</p>
+<p>
+  <strong>Query string</strong>
+  <%= @request.query_string %>
+</p>
+<h2>Query params</h2>
+<dl>
+  <%@request.query_params_to_hash.each do |param|  %>
+      <dt><strong><%= param[0] %></strong></dt>
+      <dd><%= param[1] %></dd>
+  <% end %>
+</dl>
+<h2>Cookies</h2>
+<%@request.cookies_to_hash.each do |cookie|  %>
+    <dt><strong><%= cookie[0] %></strong></dt>
+    <dd><%= cookie[1] %></dd>
+<% end %>
+
+<h2>Headers</h2>
+<%@request.headers_to_hash.each do |header|  %>
+    <dt><strong><%= header[0] %></strong></dt>
+    <dd><%= header[1] %></dd>
+<% end %>
